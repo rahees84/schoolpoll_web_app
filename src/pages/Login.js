@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { API } from '../constants/appConstants';
 
 const Login = () => {
@@ -18,26 +19,19 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(API.LOGIN_USER, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
+      const res = await axios.post(API.LOGIN_USER, form);
 
-      const data = await res.json();
-
-      if (res.ok && data.success !== false) {
+      if (res.status === 200 && res.data.success !== false) {
         setMessage('✅ Login successful!');
-        if (res.ok && data.success !== false) {
-            localStorage.setItem('user', JSON.stringify(data.user));
-            navigate('/');
-        }
-
+        localStorage.setItem('user', JSON.stringify(res.data.user));
+        localStorage.setItem('token', JSON.stringify(res.data.token));
+        
+        navigate('/');
       } else {
-        setMessage('❌ ' + (data.error || data.message || 'Login failed'));
+        setMessage('❌ ' + (res.data.error || res.data.message || 'Login failed'));
       }
     } catch (err) {
-      setMessage('❌ Server error. Try again later.');
+      setMessage('❌ ' + (err.response?.data?.error || 'Server error. Try again later.'));
     } finally {
       setLoading(false);
     }
