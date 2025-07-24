@@ -53,20 +53,34 @@ const Navbar = () => {
           {user ? (
             <>
               <li className="nav-item">
-                <Link className="nav-link" to="/candidates"><i className="fas fa-users me-1"></i> Candidates</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/voters"><i className="fas fa-user-check me-1"></i> Voters</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/poll"><i className="fas fa-vote-yea me-1"></i> Poll</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/result"><i className="fas fa-poll me-1"></i> Result</Link>
-              </li>
-              <li className="nav-item ms-3">
-                {renderUserAvatar()}
-              </li>
+  <Link className="nav-link" to="/candidates">
+    <i className="fas fa-users me-1"></i> Candidates
+  </Link>
+</li>
+<li className="nav-item">
+  <Link className="nav-link" to="/voters">
+    <i className="fas fa-id-card me-1"></i> Voters
+  </Link>
+</li>
+<li className="nav-item">
+  <Link className="nav-link" to="/poll">
+    <i className="fas fa-user-check me-1"></i> Polling Panel
+  </Link>
+</li>
+<li className="nav-item">
+  <Link className="nav-link" to="/voting-machine">
+    <i className="fas fa-check-square me-1"></i> Voting Machine
+  </Link>
+</li>
+<li className="nav-item">
+  <Link className="nav-link" to="/result">
+    <i className="fas fa-chart-bar me-1"></i> Result
+  </Link>
+</li>
+<li className="nav-item ms-3">
+  {renderUserAvatar()}
+</li>
+
             </>
           ) : (
             <>
