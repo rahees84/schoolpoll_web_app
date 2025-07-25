@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# 🗳️ School Poll Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the **React frontend** for the School Poll voting system. It provides a real-time voting interface for students and admins using REST APIs and WebSockets.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- ✅ JWT-based user authentication  
+- 🧑‍🎓 Voter management (add/edit voters)  
+- 🗳️ Candidate list and double-click voting  
+- 📡 Real-time voter authorization via Socket.IO  
+- 🖥️ Voting machine interface (one vote per authorized voter)  
+- 🎨 Clean UI using Bootstrap and Font Awesome  
 
-### `npm start`
+## 🏗️ Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+src/
+├── components/            # Reusable components
+├── pages/                 # Main page views (Voters, VotingMachine)
+├── constants/             # API endpoints and constants
+├── App.js                 # Application routes and layout
+└── index.js               # App entry point
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ⚙️ Setup Instructions
 
-### `npm test`
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/your-username/school-poll-frontend.git
+   cd school-poll-frontend
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install dependencies**  
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+3. **Start the frontend**  
+   ```bash
+   npm start
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Make sure the backend is running on `http://localhost:5000`**  
+   If it's hosted elsewhere, update the base URL in:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   `src/constants/appConstants.js`
+   ```js
+   const BASE_URL = 'http://localhost:5000';
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   export const API = {
+     CANDIDATES: `${BASE_URL}/api/candidate`,
+     VOTERS: `${BASE_URL}/api/voter`,
+     VOTE: `${BASE_URL}/api/vote`,
+     // other endpoints...
+   };
+   ```
 
-### `npm run eject`
+## 🧩 Built With
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- React  
+- Axios  
+- Socket.IO Client  
+- Bootstrap 5  
+- Font Awesome  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📌 Notes
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Voter must be authorized by polling officer before voting.  
+- Voting is confirmed via **double-click** to avoid accidental submissions.  
+- JWT token is stored in `localStorage`.  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📄 License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the [MIT License](LICENSE).
