@@ -1,5 +1,6 @@
 //const BASE_URL = 'http://192.168.43.49:5000';
-const BASE_URL = 'http://localhost:5000';
+//const BASE_URL = 'http://localhost:5000';
+const BASE_URL = "https://schoolpollapi.onrender.com";
 
 export const API = {
   CREATE_USER: `${BASE_URL}/api/user/`,
