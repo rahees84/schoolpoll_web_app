@@ -2,6 +2,8 @@
 import { io } from "socket.io-client";
 import { BASE_URL_WSS } from "../constants/appConstants";
 
-const socket = io(BASE_URL_WSS);
+const socket = io(BASE_URL_WSS, {
+  transports: ["websocket"],
+});
 
 export default socket;
