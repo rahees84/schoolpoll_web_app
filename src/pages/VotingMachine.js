@@ -98,19 +98,29 @@ const VotingMachine = () => {
     <div className="container text-center mt-5">
       <h4>Welcome {voterName || "Voter"}</h4>
       <p className="text-muted">Tap your candidate. Double-click to confirm.</p>
-      <div className="d-flex justify-content-center flex-wrap gap-3 mt-4">
-        {candidates.map((c) => (
-          <button
-            key={c._id}
-            className="btn btn-lg btn-outline-primary"
-            onDoubleClick={() => castVote(c._id)}
-            style={{ minWidth: "140px" }}
-          >
-            <div style={{ fontSize: '2rem' }}>{c.symbol || "🔘"}</div>
-            <div>{c.name}</div>
-          </button>
-        ))}
+      <div className="mt-4 d-flex flex-column align-items-center gap-3">
+  {candidates.map((c) => (
+    <div
+      key={c._id}
+      className="card shadow-sm px-4 py-3 w-100"
+      style={{ maxWidth: "400px", cursor: "pointer" }}
+      onDoubleClick={() => castVote(c._id)}
+    >
+      <div className="d-flex align-items-center">
+        <div
+          className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
+          style={{ width: "60px", height: "60px", fontSize: "1.8rem" }}
+        >
+          {c.symbol || "🔘"}
+        </div>
+        <div className="ms-4">
+          <h5 className="mb-0">{c.name}</h5>
+        </div>
       </div>
+    </div>
+  ))}
+</div>
+
     </div>
   );
 };

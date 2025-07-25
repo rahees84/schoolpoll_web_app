@@ -128,7 +128,32 @@ const Voters = () => {
                   <input className="form-control mb-2" name="name" value={formData.name} onChange={handleChange} placeholder="Name" required />
                   <input className="form-control mb-2" name="roll_number" value={formData.roll_number} onChange={handleChange} placeholder="Roll Number" required />
                   <input className="form-control mb-2" name="class_division" value={formData.class_division} onChange={handleChange} placeholder="Class Division" />
-                  <input className="form-control mb-2" name="gender" value={formData.gender} onChange={handleChange} placeholder="Gender" />
+                  <div className="mb-2">
+  <label className="form-label d-block">Gender:</label>
+  <div className="form-check form-check-inline">
+    <input
+      className="form-check-input"
+      type="radio"
+      name="gender"
+      value="Male"
+      checked={formData.gender === "Male"}
+      onChange={handleChange}
+    />
+    <label className="form-check-label">Male</label>
+  </div>
+  <div className="form-check form-check-inline">
+    <input
+      className="form-check-input"
+      type="radio"
+      name="gender"
+      value="Female"
+      checked={formData.gender === "Female"}
+      onChange={handleChange}
+    />
+    <label className="form-check-label">Female</label>
+  </div>
+</div>
+
                 </div>
                 <div className="modal-footer">
                   <button type="submit" className="btn btn-success">

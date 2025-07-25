@@ -147,11 +147,11 @@ const handleCancelVote = async () => {
 
   return (
     <div className="container mt-4">
-      <h4><i className="fas fa-poll me-2"></i>Polling Panel</h4>
+      
 
 
 <div className="d-flex justify-content-between align-items-center mt-3 mb-3">
-  <h4><i className="fas fa-chart-bar me-2"></i>Live Voting Result</h4>
+  <h4><i className="fas fa-poll me-2"></i>Polling Panel</h4>
   <button
     className="btn btn-outline-danger btn-sm"
     onClick={handleClearVotes}
