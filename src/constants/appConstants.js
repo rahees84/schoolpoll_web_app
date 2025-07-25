@@ -1,6 +1,7 @@
 //const BASE_URL = 'http://192.168.43.49:5000';
 //const BASE_URL = 'http://localhost:5000';
 const BASE_URL = "https://schoolpollapi.onrender.com";
+const BASE_URL_WSS = "wss://schoolpollapi.onrender.com";
 
 export const API = {
   CREATE_USER: `${BASE_URL}/api/user/`,
@@ -11,4 +12,4 @@ export const API = {
   PENDING_VOTE: `${BASE_URL}/api/pending-vote`,
 };
 
-export { BASE_URL };
+export { BASE_URL, BASE_URL_WSS };
