@@ -71,6 +71,9 @@ const PollingPanel = () => {
     if (classDiv) fetchVoters(classDiv);
   };
 
+
+
+
   const handleVoterClick = async (index) => {
   const voter = voters[index];
 
@@ -176,7 +179,7 @@ const handleCancelVote = async () => {
           ))}
         </select>
       </div>
-
+{loadingAllowToVote && (<div>Loading...</div>)}
       {loading ? (
         <div>Loading voters...</div>
       ) : (
@@ -193,7 +196,7 @@ const handleCancelVote = async () => {
             >
               <strong>{v.roll_number}</strong><br />
               {v.name}
-              {loadingAllowToVote ?? (<>Loading...</>)}
+              
             </button>
           ))}
         </div>

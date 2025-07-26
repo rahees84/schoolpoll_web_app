@@ -104,6 +104,11 @@ setLoading(true);
       <h4>Welcome {voterName || "Voter"}</h4>
       <p className="text-muted">Tap your candidate. Double-click to confirm.</p>
       <div className="mt-4 d-flex flex-column align-items-center gap-3">
+        {loading && (
+        <>
+        <p>Loading...</p>
+        </>
+      )}
   {candidates.map((c) => (
     <div
       key={c._id}
@@ -116,12 +121,7 @@ setLoading(true);
       }}
     >
       <div className="d-flex align-items-center">
-      {loading ? (
-        <>
-        <p>Loading...</p>
-        </>
-      ):(
-        <>
+      
         <div
           className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
           style={{ width: "60px", height: "60px", fontSize: "1.8rem" }}
@@ -131,8 +131,7 @@ setLoading(true);
         <div className="ms-4">
           <h5 className="mb-0">{c.name}</h5>
         </div>
-      </>
-      )}
+      
       </div>
     </div>
   ))}
