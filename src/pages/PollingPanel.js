@@ -9,6 +9,7 @@ const PollingPanel = () => {
   const [classDivisions, setClassDivisions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pendingVoter, setPendingVoter] = useState(null);
+  const [loadingAllowToVote, setLoadingAllowToVote] = useState(false);
 
 
   const token = JSON.parse(localStorage.getItem('token'));
@@ -73,6 +74,7 @@ const PollingPanel = () => {
   const handleVoterClick = async (index) => {
   const voter = voters[index];
 
+  setLoadingAllowToVote(true);
   try {
     // Step 1: Save to DB (pending vote)
     await axios.post(API.PENDING_VOTE, { voter_id: voter._id }, {
@@ -96,6 +98,9 @@ const PollingPanel = () => {
     } else {
       alert("Unexpected error: " + err.message);
     }
+  }
+  finally{
+    setLoadingAllowToVote(false);
   }
 };
 
@@ -182,11 +187,13 @@ const handleCancelVote = async () => {
               key={v._id}
               className={`btn btn-sm ${v.hasVoted ? 'btn-secondary' : 'btn-outline-primary'}`}
               onClick={() => handleVoterClick(index)}
-              disabled={v.hasVoted}
+              disabled={v.hasVoted || loadingAllowToVote}
               style={{ width: '80px', height: '60px', fontSize: '12px' }}
+
             >
               <strong>{v.roll_number}</strong><br />
               {v.name}
+              {loadingAllowToVote ?? (<>Loading...</>)}
             </button>
           ))}
         </div>

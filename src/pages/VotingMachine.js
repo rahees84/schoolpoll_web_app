@@ -11,6 +11,7 @@ const VotingMachine = () => {
   const [votingAllowed, setVotingAllowed] = useState(false);
   const [voted, setVoted] = useState(false);
   const [voterName, setVoterName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const token = JSON.parse(localStorage.getItem('token'));
 
@@ -45,11 +46,12 @@ const VotingMachine = () => {
   }, []);
 
   const castVote = async (candidateId) => {
+    
   if (!voterId) {
     alert("Voter not authorized");
     return;
   }
-
+setLoading(true);
   try {
     const res = await axios.post(API.VOTE, {
       voter_id: voterId,
@@ -72,6 +74,9 @@ const VotingMachine = () => {
     } else {
       alert("Something went wrong. Please try again.");
     }
+  }
+  finally{
+    setLoading(false);
   }
 };
 
@@ -104,9 +109,19 @@ const VotingMachine = () => {
       key={c._id}
       className="card shadow-sm px-4 py-3 w-100"
       style={{ maxWidth: "400px", cursor: "pointer" }}
-      onDoubleClick={() => castVote(c._id)}
+      onDoubleClick={() => {
+        if(!loading){
+          castVote(c._id);
+        }
+      }}
     >
       <div className="d-flex align-items-center">
+      {loading ? (
+        <>
+        <p>Loading...</p>
+        </>
+      ):(
+        <>
         <div
           className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
           style={{ width: "60px", height: "60px", fontSize: "1.8rem" }}
@@ -116,6 +131,8 @@ const VotingMachine = () => {
         <div className="ms-4">
           <h5 className="mb-0">{c.name}</h5>
         </div>
+      </>
+      )}
       </div>
     </div>
   ))}
