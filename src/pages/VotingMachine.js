@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
-import { API } from "../constants/appConstants";
+import { API, BASE_URL } from "../constants/appConstants";
 
-const socket = io("http://localhost:5000"); // Update if backend is hosted elsewhere
+const socket = io(BASE_URL); // Update if backend is hosted elsewhere
 
 const VotingMachine = () => {
   const [candidates, setCandidates] = useState([]);
