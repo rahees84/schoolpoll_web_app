@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { API } from '../constants/appConstants';
+import React, { useState } from "react";
+import { API } from "../constants/appConstants";
 
 const Signup = () => {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
-  const [message, setMessage] = useState('');
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -12,33 +12,33 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage('');
+    setMessage("");
     setLoading(true);
 
     try {
       const response = await fetch(API.CREATE_USER, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
       const data = await response.json();
 
       if (response.ok && data.success !== false) {
-        setMessage('✅ Account created successfully! Please login.');
-        setForm({ name: '', email: '', password: '' });
+        setMessage("✅ Account created successfully! Please login.");
+        setForm({ name: "", email: "", password: "" });
       } else {
-        setMessage('❌ ' + (data.error || data.message || 'Signup failed'));
+        setMessage("❌ " + (data.error || data.message || "Signup failed"));
       }
     } catch (err) {
-      setMessage('❌ Server error. Try again later.');
+      setMessage("❌ Server error. Try again later.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: '400px' }}>
+    <div className="container mt-5" style={{ maxWidth: "400px" }}>
       <h3 className="mb-4 text-center">Sign Up</h3>
 
       {message && <div className="alert alert-info">{message}</div>}
@@ -80,8 +80,18 @@ const Signup = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-success w-100" disabled={loading}>
-          {loading ? 'Creating...' : <><i className="fas fa-user-plus me-2"></i>Sign Up</>}
+        <button
+          type="submit"
+          className="btn btn-success w-100"
+          disabled={loading}
+        >
+          {loading ? (
+            "Creating..."
+          ) : (
+            <>
+              <i className="fas fa-user-plus me-2"></i>Sign Up
+            </>
+          )}
         </button>
       </form>
     </div>

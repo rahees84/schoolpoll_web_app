@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { API } from '../constants/appConstants';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { API } from "../constants/appConstants";
 
 const Voters = () => {
   const [voters, setVoters] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState({
-    name: '',
-    roll_number: '',
-    class_division: '',
-    gender: '',
+    name: "",
+    roll_number: "",
+    class_division: "",
+    gender: "",
   });
 
-  const token = JSON.parse(localStorage.getItem('token'));
+  const token = JSON.parse(localStorage.getItem("token"));
 
   const fetchVoters = async () => {
     try {
@@ -31,7 +31,7 @@ const Voters = () => {
   }, []);
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSaveVoter = async (e) => {
@@ -47,7 +47,12 @@ const Voters = () => {
         });
       }
 
-      setFormData({ name: '', roll_number: '', class_division: '', gender: '' });
+      setFormData({
+        name: "",
+        roll_number: "",
+        class_division: "",
+        gender: "",
+      });
       setShowForm(false);
       setEditingId(null);
       fetchVoters();
@@ -56,7 +61,8 @@ const Voters = () => {
       let message = "Failed to save voter";
 
       if (err.response && err.response.data) {
-        message = err.response.data.error || err.response.data.message || message;
+        message =
+          err.response.data.error || err.response.data.message || message;
       }
 
       alert(message);
@@ -77,7 +83,9 @@ const Voters = () => {
   return (
     <div className="container mt-5">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h3><i className="fas fa-user-graduate me-2"></i>Voters</h3>
+        <h3>
+          <i className="fas fa-user-graduate me-2"></i>Voters
+        </h3>
         <button className="btn btn-primary" onClick={() => setShowForm(true)}>
           <i className="fas fa-plus me-1"></i>Add Voter
         </button>
@@ -97,14 +105,17 @@ const Voters = () => {
             </tr>
           </thead>
           <tbody>
-            {voters.map(v => (
+            {voters.map((v) => (
               <tr key={v._id}>
                 <td>{v.name}</td>
                 <td>{v.roll_number}</td>
                 <td>{v.class_division}</td>
                 <td>{v.gender}</td>
                 <td>
-                  <button className="btn btn-sm btn-warning me-2" onClick={() => handleEdit(v)}>
+                  <button
+                    className="btn btn-sm btn-warning me-2"
+                    onClick={() => handleEdit(v)}
+                  >
                     <i className="fas fa-edit"></i>
                   </button>
                 </td>
@@ -116,50 +127,85 @@ const Voters = () => {
 
       {/* Add Voter Modal */}
       {showForm && (
-        <div className="modal d-block" tabIndex="-1" style={{ background: 'rgba(0,0,0,0.5)' }}>
+        <div
+          className="modal d-block"
+          tabIndex="-1"
+          style={{ background: "rgba(0,0,0,0.5)" }}
+        >
           <div className="modal-dialog">
             <div className="modal-content">
               <form onSubmit={handleSaveVoter}>
                 <div className="modal-header">
-                  <h5 className="modal-title">{editingId ? 'Edit Voter' : 'Add Voter'}</h5>
-                  <button type="button" className="btn-close" onClick={() => setShowForm(false)}></button>
+                  <h5 className="modal-title">
+                    {editingId ? "Edit Voter" : "Add Voter"}
+                  </h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={() => setShowForm(false)}
+                  ></button>
                 </div>
                 <div className="modal-body">
-                  <input className="form-control mb-2" name="name" value={formData.name} onChange={handleChange} placeholder="Name" required />
-                  <input className="form-control mb-2" name="roll_number" value={formData.roll_number} onChange={handleChange} placeholder="Roll Number" required />
-                  <input className="form-control mb-2" name="class_division" value={formData.class_division} onChange={handleChange} placeholder="Class Division" />
+                  <input
+                    className="form-control mb-2"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Name"
+                    required
+                  />
+                  <input
+                    className="form-control mb-2"
+                    name="roll_number"
+                    value={formData.roll_number}
+                    onChange={handleChange}
+                    placeholder="Roll Number"
+                    required
+                  />
+                  <input
+                    className="form-control mb-2"
+                    name="class_division"
+                    value={formData.class_division}
+                    onChange={handleChange}
+                    placeholder="Class Division"
+                  />
                   <div className="mb-2">
-  <label className="form-label d-block">Gender:</label>
-  <div className="form-check form-check-inline">
-    <input
-      className="form-check-input"
-      type="radio"
-      name="gender"
-      value="Male"
-      checked={formData.gender === "Male"}
-      onChange={handleChange}
-    />
-    <label className="form-check-label">Male</label>
-  </div>
-  <div className="form-check form-check-inline">
-    <input
-      className="form-check-input"
-      type="radio"
-      name="gender"
-      value="Female"
-      checked={formData.gender === "Female"}
-      onChange={handleChange}
-    />
-    <label className="form-check-label">Female</label>
-  </div>
-</div>
-
+                    <label className="form-label d-block">Gender:</label>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="gender"
+                        value="Male"
+                        checked={formData.gender === "Male"}
+                        onChange={handleChange}
+                      />
+                      <label className="form-check-label">Male</label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="gender"
+                        value="Female"
+                        checked={formData.gender === "Female"}
+                        onChange={handleChange}
+                      />
+                      <label className="form-check-label">Female</label>
+                    </div>
+                  </div>
                 </div>
                 <div className="modal-footer">
                   <button type="submit" className="btn btn-success">
-                    {editingId ? 'Update' : 'Save'}
+                    {editingId ? "Update" : "Save"}
                   </button>
-                  <button type="button" className="btn btn-secondary" onClick={() => setShowForm(false)}>Cancel</button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setShowForm(false)}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>
